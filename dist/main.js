@@ -1,0 +1,2 @@
+document.addEventListener("DOMContentLoaded",(e=>{console.log("DOM fully loaded and parsed");let l=document.getElementById("demoCanvas");window.canvas=l;let t=l.getContext("2d");t.fillstyle="brown",t.fillRect(0,530,1220,20),t.fillstyle="red",t.fillRect(20,360,100,1e3),t.fillRect(35,320,70,100),t.fillRect(280,420,70,120),t.fillRect(940,420,70,120),t.fillRect(220,410,850,10)}));
+//# sourceMappingURL=main.js.map
