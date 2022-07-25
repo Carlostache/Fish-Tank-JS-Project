@@ -35,29 +35,29 @@ document.addEventListener('DOMContentLoaded', (event) => {
     let ctx = canvas.getContext('2d');
 
     //Floor
-    ctx.fillstyle = "brown";
+    ctx.fillstyle = "white";
     ctx.fillRect(0,530, 1220, 20);
 
     //Radio Table
-    ctx.fillstyle = "red";
     ctx.fillRect(20, 360, 100, 1000);
 
-    //radio
+    //Radio
 
     ctx.fillRect(35, 320, 70, 100)
 
     //Fishtank Table
 
     //Left Leg
-    ctx.fillRect(280, 420, 70, 120)
+    ctx.fillRect(280, 480, 70, 120)
 
     //Right Leg
-    ctx.fillRect(940, 420, 70, 120)
+    ctx.fillRect(940, 480, 70, 120)
 
     //Tabletop
-    ctx.fillRect(220, 410, 850, 10)
+    ctx.fillRect(220, 470, 850, 10)
 
     //Fishtank
+    ctx.strokeRect(230, 100, 830, 370)
     
 
 });
