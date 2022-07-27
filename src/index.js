@@ -74,33 +74,31 @@ document.addEventListener('DOMContentLoaded', (event) => {
             this.speed = Math.random() * 4 - 2;
             this.size = 3;
             this.radius = 30;
-            this.x = Math.floor(Math.random() * (1060 - 230) + 230);
-            this.y = Math.floor(Math.random() * (470 - 100) + 100);
-            this.width = 45;
-            this.height = 45;
             this.spriteWidth = 45;
             this.spriteHeight = 45;
+            this.width = this.spriteWidth
+            this.height = this.spriteHeight
+            this.x = Math.floor(Math.random() * (1060 - 230) + 230);
+            this.y = Math.floor(Math.random() * (470 - 100) + 100);
             // this.spriteWidthLeft = spriteWidthLeft;
             // this.spriteHeightLeft = spriteHeightLeft;
             this.frame = 0;
-            this.swimSpeed = Math.floor(Math.random() * 3 + 1);
+            // this.swimSpeed = Math.floor(Math.random() * 3 + 1);
             // this.frameLeft = 45
         }
         update() {
-            // this.x++;
-            // this.y++;
-            this.x += this.speed;
-            this.y += this.speed;
-            // if (gameFrame % this.swimSpeed === 0) {
-            //     this.frame > 1 ? this.frame = 0 : this.frame++;
-            // }
+            this.x += Math.random() * 7 - 3.5;
+            this.y += Math.random() * 7 - 3.5;
+            if (gameFrame % 7 === 0){
+                this.frame > 1 ? this.frame = 0 : this.frame++;
+            };
             //Allows us to control update rate of animations and 
             //cycles through the three animations
     
         }
         draw(){
             // ctx.fillRect(this.x, this.y, this.radius, this.radius);
-            ctx.drawImage(this.type, 0, 0, this.spriteWidth, this.spriteHeight, this.x, this.y, this.width, this.height);
+            ctx.drawImage(this.type, this.frame * this.spriteWidth, 0, this.spriteWidth, this.spriteHeight, this.x, this.y, this.width, this.height);
         }
     };
 
