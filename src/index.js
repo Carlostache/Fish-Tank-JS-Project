@@ -70,7 +70,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
             const midFishImage = new Image();
             midFishImage.src = './assets/mid_fish_sprite_sheet_final.png'
             this.type = midFishImage;
-            // this.speed = velocity;
             this.speed = Math.random() * 4 - 2;
             this.size = 3;
             this.radius = 30;
@@ -79,16 +78,24 @@ document.addEventListener('DOMContentLoaded', (event) => {
             this.width = this.spriteWidth
             this.height = this.spriteHeight
             this.x = Math.floor(Math.random() * (1060 - 230) + 230);
-            this.y = Math.floor(Math.random() * (470 - 100) + 100);
+            this.y = Math.floor(Math.random() * (420 - 100) + 100);
             // this.spriteWidthLeft = spriteWidthLeft;
             // this.spriteHeightLeft = spriteHeightLeft;
             this.frame = 0;
+            this.angle = 0;
+            this.angleSpeed = Math.random() * 0.2;
+            this.curve = Math.random() * 5;
             // this.swimSpeed = Math.floor(Math.random() * 3 + 1);
             // this.frameLeft = 45
         }
         update() {
-            this.x += Math.random() * 7 - 3.5;
-            this.y += Math.random() * 7 - 3.5;
+            this.x += this.speed;
+            this.y += this.curve * Math.sin(this.angle);
+            this.angle += this.angleSpeed;
+            if (this.x + this.width > 1063) this.speed = Math.random() * -3;
+            if (this.x + this.width < 267) this.speed = Math.random() * 3;
+            if (this.y + this.height > 435) this.curve = Math.random() * 5;
+            if (this.y + this.height < 100) this.angleSpeed = Math.random() * 0.2;
             if (gameFrame % 7 === 0){
                 this.frame > 1 ? this.frame = 0 : this.frame++;
             };
@@ -98,7 +105,10 @@ document.addEventListener('DOMContentLoaded', (event) => {
         }
         draw(){
             // ctx.fillRect(this.x, this.y, this.radius, this.radius);
+            if (this.speed < 0) {
             ctx.drawImage(this.type, this.frame * this.spriteWidth, 0, this.spriteWidth, this.spriteHeight, this.x, this.y, this.width, this.height);
+            } else
+            ctx.drawImage(this.type, this.frame * this.spriteWidth, 45, this.spriteWidth, this.spriteHeight, this.x, this.y, this.width, this.height);
         }
     };
 
