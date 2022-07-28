@@ -53,9 +53,28 @@ h1 {
 }
 // #fishTankDemo {}
 
+#instructions {
+    text-align: center;
+    font-size: large;
+    padding-bottom: 10px;
+}
+
+#github > img {
+    background: rgb(68, 99, 185);
+    height: 75px;
+    width: 75px;
+}
+
+#LinkedIn > img {
+    position: center;
+    height: 75px;
+    width: 100px;
+}
+
 body {
-    background: rgb(141, 142, 146);
-    color: #8c4343;
+    // background: rgb(141, 142, 146);
+    background: rgb(68, 99, 185);
+    color: rgb(181, 182, 189);
 }
 
 #demoCanvas {
