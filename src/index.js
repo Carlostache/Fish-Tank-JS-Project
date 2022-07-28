@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     var jukebox = new Image();
     jukebox.src = './assets/jukebox_cropped.png';
 
-    ctx.drawImage(jukebox, 20, 360, 100, 200);
+    ctx.drawImage(jukebox, 20, 360, 100, 170);
 
     //Fishtank Table
 
@@ -202,7 +202,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
         update() {
             if (this.x < 220 || this.x > 1060 || this.y < 100) {
                 this.speed = 0;
-                if (20 < this.x < 120 && this.y < 360 || this.y < 490) {
+                if (this.x < 120 && this.y < 360 || this.y < 490) {
                 this.y += 3;
                 } else this.y += 0;
             }else {
