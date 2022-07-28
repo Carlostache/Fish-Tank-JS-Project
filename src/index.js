@@ -11,23 +11,11 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
     let ctx = canvas.getContext('2d');
 
-    CANVAS_WIDTH = canvas.width;
+    let CANVAS_WIDTH = canvas.width;
 
-    CANVAS_HEIGHT = canvas.height;
+    let CANVAS_HEIGHT = canvas.height;
 
-    //Mouse Movement & Logic
-
-    document.addEventListener("mousemove", mouseMoveHandler, false);
-
-    let paddleWidth = 4
-
-
-    function mouseMoveHandler(e) {
-        var relativeX = e.clientX - canvas.offsetLeft;
-        if(relativeX > 0 && relativeX < canvas.width) {
-            paddleX = relativeX - paddleWidth/2;
-        }
-    }
+    // Canvas Elements and Collision Boundaries
 
     function renderCanvasElements() {
     //Floor
@@ -56,10 +44,48 @@ document.addEventListener('DOMContentLoaded', (event) => {
     ctx.strokeRect(230, 100, 830, 370)
 
     }
+   
 
-    //test Fish rendering and animation
+    //Fish rendering and animation
     
     let fishArray = [];
+
+    let current_fish_index = null;
+
+    let is_mouse_in_fish = function(x, y, fish) {
+        let fish_left = fish.x;
+        let fish_right = fish.x + fish.width;
+        let fish_top = fish.y;
+        let fish_bottom = fish.y + fish.height;
+
+        if (x > fish_left && x < fish_right && y > fish_top && y < fish_bottom) {
+            return true; // mouse in the boundary of the rendered fish object
+        }
+
+        return false;
+    };
+
+    let mouse_down = function(event) {
+        event.preventDefault();
+        console.log(event)
+        let startX = parseInt(event.clientX);
+        let startY = parseInt(event.clientY);
+        
+        console.log(startX)
+
+        let index = 0;
+        for (let fish of fishArray) {
+            if (is_mouse_in_fish(startX, startY, fish)) {
+                console.log('yes');
+                current_fish_index = index;
+            }
+            index++;
+        }
+    };
+
+    canvas.onmousedown = mouse_down;
+
+
 
     let gameFrame = 0;
 
@@ -89,11 +115,16 @@ document.addEventListener('DOMContentLoaded', (event) => {
             // this.frameLeft = 45
         }
         update() {
-            this.x += this.speed;
-            this.y += this.curve * Math.sin(this.angle);
-            this.angle += this.angleSpeed;
+            if (this.x < 220 || this.x > 1060) {
+                this.speed = 0;
+                this.y += 3;
+            } else {
+                this.x += this.speed;
+                this.y += this.curve * Math.sin(this.angle);
+                this.angle += this.angleSpeed;
+            };
             if (this.x + this.width > 1063) this.speed = Math.random() * -3;
-            if (this.x + this.width < 267) this.speed = Math.random() * 3;
+            if (this.x + this.width < 268) this.speed = Math.random() * 3;
             if (this.y + this.height > 435) this.curve = Math.random() * 5;
             if (this.y + this.height < 100) this.angleSpeed = Math.random() * 0.2;
             if (gameFrame % 7 === 0){
@@ -123,13 +154,49 @@ document.addEventListener('DOMContentLoaded', (event) => {
         requestAnimationFrame(animate);
     };
 
-    testFish = new midFish();
+    let testFish = new midFish();
 
     fishArray.push(testFish);
 
     console.log(fishArray); 
 
     animate();
+
+
+    // // Mouse Movement and Dragging Features
+
+    // let current_fish_index = null;
+
+    // let is_mouse_in_fish = function(x, y, fish) {
+    //     let fish_left = fish.x;
+    //     let fish_right = fish.x + fish.width;
+    //     let fish_top = fish.y;
+    //     let fish_bottom = fish.y + fish.height;
+
+    //     if (x > fish_left && x < fish_right && y > fish_top && y < fish_bottom) {
+    //         return true; // mouse in the boundary of the rendered fish object
+    //     }
+
+    //     return false;
+    // };
+
+    // let mouse_down = function(event) {
+    //     event.preventDefault();
+
+    //     let startX = parseInt(event.clientX);
+    //     let startY = parseInt(event.clientY);
+
+    //     let index = 0;
+    //     for (let fish of fishArray) {
+    //         if (is_mouse_in_fish(startX, startY, fish)) {
+    //             console.log('yes');
+    //             current_fish_index = index;
+    //         }
+    //         index++;
+    //     }
+    // };
+
+    // canvas.onmousedown = mouse_down;
 
 });
 
