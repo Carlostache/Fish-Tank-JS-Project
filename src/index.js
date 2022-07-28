@@ -32,15 +32,15 @@ document.addEventListener('DOMContentLoaded', (event) => {
     ctx.drawImage(background, 0, 0);
 
     //Floor
-    ctx.fillstyle = "white";
+    ctx.fillStyle = "black";
     ctx.fillRect(0,530, 1220, 20);
 
     //Jukebox Table
     ctx.fillRect(20, 360, 100, 200);
     var jukebox = new Image();
-    jukebox.src = './assets/jukebox_cropped.png'
+    jukebox.src = './assets/jukebox_cropped.png';
 
-    ctx.drawImage(jukebox, 20, 360, 100, 200)
+    ctx.drawImage(jukebox, 20, 360, 100, 200);
 
     //Fishtank Table
 
@@ -54,7 +54,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
     // ctx.fillRect(220, 470, 850, 10)
 
     //Fishtank
-    ctx.strokeRect(230, 100, 830, 430)
+    ctx.strokeRect(230, 100, 830, 430);
+    // ctx.fillRect(230, 110, 830, 430);
 
     }
    
@@ -103,7 +104,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
     let mouse_down = function(event) {
         event.preventDefault();
-        // console.log(event)
         startX = parseInt(event.clientX) - offsetX;
         startY = parseInt(event.clientY) - offsetY;
         
@@ -112,7 +112,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
         for (let fish of fishArray) {
             if (is_mouse_in_fish(startX, startY, fish)) {
                 current_fish_index = index;
-                console.log('yes');
                 is_dragging = true;
                 return;
             }
@@ -242,6 +241,9 @@ document.addEventListener('DOMContentLoaded', (event) => {
                 fish.draw();
             }
         });
+        ctx.fillStyle = 'rgba(68, 99, 185, 0.3)';
+        ctx.fillRect(230, 110, 830, 420);
+
         gameFrame++;
         requestAnimationFrame(animate);
     };
@@ -253,7 +255,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
     // fishArray.push(testFish);
 
-    console.log(fishArray); 
+    // console.log(fishArray); 
 
     animate();
 
