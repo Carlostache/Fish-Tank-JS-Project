@@ -51,6 +51,8 @@ input {
 h1 {
   text-align: center;
   font-size: xx-large;
+  padding-top: 10px;
+  padding-bottom: 20px;
 }
 
 body {
@@ -59,7 +61,6 @@ body {
 }
 
 #demoCanvas {
-  background: rgb(68, 99, 185);
   margin: 0 auto;
   margin-bottom: 1rem;
   display: block;

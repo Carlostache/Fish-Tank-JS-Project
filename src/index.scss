@@ -48,6 +48,8 @@ input{
 h1 {
     text-align: center;
     font-size: xx-large;
+    padding-top: 10px;
+    padding-bottom: 20px;
 }
 // #fishTankDemo {}
 
@@ -57,7 +59,7 @@ body {
 }
 
 #demoCanvas {
-    background: rgb(68, 99, 185);
+    // background: rgb(68, 99, 185);
     // padding: 2px;
     // margin-right: 4px, black;
     // margin-left: 4px, black;

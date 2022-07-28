@@ -19,33 +19,42 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
     let CANVAS_HEIGHT = canvas.height;
 
+
     // Canvas Elements and Collision Boundaries
 
     function renderCanvasElements() {
+
+    // Rendering 2D still background
+
+    var background = new Image();
+    background.src = './assets/fish_tank_background.png';
+
+    ctx.drawImage(background, 0, 0);
+
     //Floor
     ctx.fillstyle = "white";
     ctx.fillRect(0,530, 1220, 20);
 
-    //Radio Table
-    ctx.fillRect(20, 360, 100, 1000);
+    //Jukebox Table
+    ctx.fillRect(20, 360, 100, 200);
+    var jukebox = new Image();
+    jukebox.src = './assets/jukebox_cropped.png'
 
-    //Radio
-
-    ctx.fillRect(35, 320, 70, 100)
+    ctx.drawImage(jukebox, 20, 360, 100, 200)
 
     //Fishtank Table
 
-    //Left Leg
-    ctx.fillRect(280, 480, 70, 120)
+    // //Left Leg
+    // ctx.fillRect(280, 480, 70, 120)
 
-    //Right Leg
-    ctx.fillRect(940, 480, 70, 120)
+    // //Right Leg
+    // ctx.fillRect(940, 480, 70, 120)
 
-    //Tabletop
-    ctx.fillRect(220, 470, 850, 10)
+    // //Tabletop
+    // ctx.fillRect(220, 470, 850, 10)
 
     //Fishtank
-    ctx.strokeRect(230, 100, 830, 370)
+    ctx.strokeRect(230, 100, 830, 430)
 
     }
    
@@ -164,11 +173,9 @@ document.addEventListener('DOMContentLoaded', (event) => {
     canvas.onmousemove = mouse_move;
 
 
-
-
     let gameFrame = 0;
 
-    // const initialFishNum = 1;
+    var initialFishNum = 11;
 
     class midFish {
         constructor() {
@@ -183,23 +190,22 @@ document.addEventListener('DOMContentLoaded', (event) => {
             this.width = this.spriteWidth
             this.height = this.spriteHeight
             this.x = Math.floor(Math.random() * (1060 - 230) + 230);
-            this.y = Math.floor(Math.random() * (420 - 100) + 100);
+            this.y = Math.floor(Math.random() * (400 - 100) + 100);
             this.frame = 0;
             this.angle = 0;
             this.angleSpeed = Math.random() * 0.2;
-            this.curve = Math.random() * 5;
+            this.curve = Math.random() * 3;
             this.dragging = false;
         }
         dragReset() {
             if (!is_dragging) this.dragging = false;
         }
         update() {
-            if (this.x < 220 || this.x > 1060) {
+            if (this.x < 220 || this.x > 1060 || this.y < 100) {
                 this.speed = 0;
+                if (20 < this.x < 360 && this.y < 360 || this.y < 490) {
                 this.y += 3;
-            } else if (this.x < 220 || this.x > 1060 && this.y + this.height > 530) {
-                this.speed = 0;
-                this.y = 532 + this.height;
+                } else this.y += 0;
             }else {
                 this.x += this.speed;
                 this.y += this.curve * Math.sin(this.angle);
@@ -207,7 +213,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
             };
             if (this.x + this.width > 1063) this.speed = Math.random() * -3;
             if (this.x + this.width < 268) this.speed = Math.random() * 3;
-            if (this.y + this.height > 435) this.curve = Math.random() * 5;
+            if (this.y + this.height > 435) this.curve = Math.random() * 2;
             if (this.y + this.height < 100) this.angleSpeed = Math.random() * 0.2;
             if (gameFrame % 7 === 0){
                 this.frame > 1 ? this.frame = 0 : this.frame++;
@@ -215,14 +221,13 @@ document.addEventListener('DOMContentLoaded', (event) => {
             //Allows us to control update rate of animations and 
             //cycles through the three animations
     
-        }
+        };
         draw(){
-            // ctx.fillRect(this.x, this.y, this.radius, this.radius);
             if (this.speed < 0) {
             ctx.drawImage(this.type, this.frame * this.spriteWidth, 0, this.spriteWidth, this.spriteHeight, this.x, this.y, this.width, this.height);
             } else
             ctx.drawImage(this.type, this.frame * this.spriteWidth, 45, this.spriteWidth, this.spriteHeight, this.x, this.y, this.width, this.height);
-        }
+        };
     };
 
     function animate() {
@@ -241,9 +246,12 @@ document.addEventListener('DOMContentLoaded', (event) => {
         requestAnimationFrame(animate);
     };
 
-    let testFish = new midFish();
+    for (let i = 0; i < initialFishNum; i++) {
+        fishArray.push(new midFish());
+    };
+    // let testFish = new midFish();
 
-    fishArray.push(testFish);
+    // fishArray.push(testFish);
 
     console.log(fishArray); 
 
